@@ -1,3 +1,8 @@
 import { Root } from ".";
 
-export const { rootIncrement, rootDecrement, rootReset, rootIncreaseByAmount } = Root.actions;
+export const {
+  rootIncrement,
+  rootDecrement,
+  rootReset,
+  rootIncrementByAmount,
+} = Root.actions;

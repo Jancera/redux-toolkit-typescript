@@ -16,7 +16,7 @@ export const Root = createSlice({
     rootReset(state: IRootProps) {
       state.counter = 0;
     },
-    rootIncreaseByAmount(state: IRootProps, action: PayloadAction<number>) {
+    rootIncrementByAmount(state: IRootProps, action: PayloadAction<number>) {
       state.counter += action.payload;
     },
   },

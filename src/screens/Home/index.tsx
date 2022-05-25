@@ -1,15 +1,25 @@
 import React from "react";
-import { ActivityIndicator, Button, Modal, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Button,
+  Modal,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import { useAppDispatch } from "../../store/hooks/useAppDispatch";
 import { useAppSelector } from "../../store/hooks/useAppSelector";
 import {
   rootDecrement,
-  rootIncreaseByAmount,
   rootIncrement,
+  rootIncrementByAmount,
   rootReset,
 } from "../../store/root/actions";
-import { rootIncrementAsync } from "../../store/root/thunks";
+import {
+  rootIncrementAsync,
+  rootIncrementIfOdd,
+} from "../../store/root/thunks";
 
 const Home = () => {
   const { counter, loading } = useAppSelector((store) => store.root);
@@ -29,7 +39,9 @@ const Home = () => {
         </View>
       </Modal>
       <Text style={styles.counter}>{counter}</Text>
-      <Text style={styles.text}>Click into the buttons to increase and decrease the counter</Text>
+      <Text style={styles.text}>
+        Click into the buttons to increase and decrease the counter
+      </Text>
       <View style={styles.buttonContainer}>
         <Button
           title="increase"
@@ -54,7 +66,13 @@ const Home = () => {
         <Button
           title="by five"
           onPress={() => {
-            dispatch(rootIncreaseByAmount(5));
+            dispatch(rootIncrementByAmount(5));
+          }}
+        />
+        <Button
+          title="if odd"
+          onPress={() => {
+            dispatch(rootIncrementIfOdd(3));
           }}
         />
         <Button
@@ -97,7 +115,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "80%",
     marginTop: 10,
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
   },
 });
 
