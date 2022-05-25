@@ -17,16 +17,17 @@ export const Root = createSlice({
       state.counter = 0;
     },
     rootIncreaseByAmount(state: IRootProps, action: PayloadAction<number>) {
-      state.counter + action.payload;
+      state.counter += action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(rootIncrementAsync.fulfilled, (state, action) => {
-        state.counter += 1;
+        state.counter += action.payload;
+        state.loading = false;
       })
       .addCase(rootIncrementAsync.pending, (state, action) => {
-        console.log("pending");
+        state.loading = true;
       })
       .addCase(rootIncrementAsync.rejected, (state, action) => {
         console.log("rejected");

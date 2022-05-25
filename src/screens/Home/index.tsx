@@ -1,16 +1,33 @@
-import React, { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import React from "react";
+import { ActivityIndicator, Button, Modal, StyleSheet, Text, View } from "react-native";
 
 import { useAppDispatch } from "../../store/hooks/useAppDispatch";
 import { useAppSelector } from "../../store/hooks/useAppSelector";
-import { rootDecrement, rootIncrement } from "../../store/root/actions";
+import {
+  rootDecrement,
+  rootIncreaseByAmount,
+  rootIncrement,
+  rootReset,
+} from "../../store/root/actions";
+import { rootIncrementAsync } from "../../store/root/thunks";
 
 const Home = () => {
-  const counter = useAppSelector((store) => store.root.counter);
+  const { counter, loading } = useAppSelector((store) => store.root);
   const dispatch = useAppDispatch();
 
   return (
     <View style={styles.container}>
+      <Modal
+        style={styles.modal}
+        animationType="slide"
+        transparent={true}
+        visible={loading}
+        onRequestClose={() => console.log("Request close")}
+      >
+        <View style={styles.modalContainer}>
+          <ActivityIndicator size={60} color="white" />
+        </View>
+      </Modal>
       <Text style={styles.counter}>{counter}</Text>
       <Text style={styles.text}>Click into the buttons to increase and decrease the counter</Text>
       <View style={styles.buttonContainer}>
@@ -26,8 +43,27 @@ const Home = () => {
             dispatch(rootDecrement());
           }}
         />
+        <Button
+          title="async"
+          onPress={() => {
+            dispatch(rootIncrementAsync(2));
+          }}
+        />
       </View>
-      <TextInput style={styles.input} />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="by five"
+          onPress={() => {
+            dispatch(rootIncreaseByAmount(5));
+          }}
+        />
+        <Button
+          title="clear"
+          onPress={() => {
+            dispatch(rootReset());
+          }}
+        />
+      </View>
     </View>
   );
 };
@@ -38,6 +74,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  modal: {},
+  modalContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    backgroundColor: "rgba(0,0,0,0.8)",
   },
   counter: {
     fontSize: 42,
@@ -52,13 +95,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
-    width: "50%",
-    justifyContent: "space-between",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "black",
     width: "80%",
+    marginTop: 10,
+    justifyContent: "space-evenly",
   },
 });
 
