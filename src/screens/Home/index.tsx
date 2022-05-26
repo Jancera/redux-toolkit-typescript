@@ -64,13 +64,13 @@ const Home = () => {
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          title="by five"
+          title="  by five  "
           onPress={() => {
             dispatch(rootIncrementByAmount(5));
           }}
         />
         <Button
-          title="if odd"
+          title="   if odd   "
           onPress={() => {
             dispatch(rootIncrementIfOdd(3));
           }}
