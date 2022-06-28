@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userInitialState } from "./initialState";
 import { IUser } from "./interfaces/IUser";
 
-export const User = createSlice({
+export const userSlice = createSlice({
   name: "user",
   initialState: userInitialState,
   reducers: {

@@ -1,28 +1,23 @@
 import React from "react";
-import {
-  ActivityIndicator,
-  Button,
-  Modal,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, Modal, Text, View } from "react-native";
+import Button from "../../components/Button";
 
 import { useAppDispatch } from "../../store/hooks/useAppDispatch";
 import { useAppSelector } from "../../store/hooks/useAppSelector";
 import {
-  rootDecrement,
-  rootIncrement,
-  rootIncrementByAmount,
-  rootReset,
-} from "../../store/root/actions";
+  counterDecrement,
+  counterIncrement,
+  counterIncrementByAmount,
+  counterReset,
+} from "../../store/counter/actions";
 import {
-  rootIncrementAsync,
-  rootIncrementIfOdd,
-} from "../../store/root/thunks";
+  counterIncrementAsync,
+  counterIncrementIfOdd,
+} from "../../store/counter/thunks";
+import { styles } from "./styles";
 
 const Home = () => {
-  const { counter, loading } = useAppSelector((store) => store.root);
+  const { counter, loading } = useAppSelector((store) => store.counter);
   const dispatch = useAppDispatch();
 
   return (
@@ -35,7 +30,7 @@ const Home = () => {
         onRequestClose={() => console.log("Request close")}
       >
         <View style={styles.modalContainer}>
-          <ActivityIndicator size={60} color="white" />
+          <ActivityIndicator size={60} color="#5fc4e3" />
         </View>
       </Modal>
       <Text style={styles.counter}>{counter}</Text>
@@ -44,79 +39,46 @@ const Home = () => {
       </Text>
       <View style={styles.buttonContainer}>
         <Button
-          title="increase"
+          title="Increase"
           onPress={() => {
-            dispatch(rootIncrement());
+            dispatch(counterIncrement());
           }}
         />
         <Button
-          title="decrease"
+          title="Decrease"
           onPress={() => {
-            dispatch(rootDecrement());
+            dispatch(counterDecrement());
           }}
         />
         <Button
-          title="async"
+          title="Async"
           onPress={() => {
-            dispatch(rootIncrementAsync(2));
+            dispatch(counterIncrementAsync(2));
           }}
         />
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          title="  by five  "
+          title="By five"
           onPress={() => {
-            dispatch(rootIncrementByAmount(5));
+            dispatch(counterIncrementByAmount(5));
           }}
         />
         <Button
-          title="   if odd   "
+          title="If odd"
           onPress={() => {
-            dispatch(rootIncrementIfOdd(3));
+            dispatch(counterIncrementIfOdd(3));
           }}
         />
         <Button
-          title="clear"
+          title="Clear"
           onPress={() => {
-            dispatch(rootReset());
+            dispatch(counterReset());
           }}
         />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modal: {},
-  modalContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-    backgroundColor: "rgba(0,0,0,0.8)",
-  },
-  counter: {
-    fontSize: 42,
-    fontWeight: "bold",
-  },
-  text: {
-    width: "70%",
-    textAlign: "center",
-    fontSize: 18,
-    margin: 10,
-  },
-  buttonContainer: {
-    display: "flex",
-    flexDirection: "row",
-    width: "80%",
-    marginTop: 10,
-    justifyContent: "space-around",
-  },
-});
 
 export default Home;

@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppThunk } from "../types";
 
-import { rootIncrementByAmount } from "./actions";
+import { counterIncrementByAmount } from "./actions";
 
-export const rootIncrementAsync = createAsyncThunk(
+export const counterIncrementAsync = createAsyncThunk(
   "increment/counter",
   async (amount: number) => {
     const response = await new Promise<{ data: number }>((resolve) =>
@@ -14,12 +14,11 @@ export const rootIncrementAsync = createAsyncThunk(
   },
 );
 
-export const rootIncrementIfOdd =
+export const counterIncrementIfOdd =
   (amount: number): AppThunk =>
   (dispatch, getState) => {
-    // await new Promise((res) => setTimeout(() => res(""), 3000));
-    const currentValue = getState().root;
+    const currentValue = getState().counter;
     if (currentValue.counter % 2 === 1) {
-      dispatch(rootIncrementByAmount(amount));
+      dispatch(counterIncrementByAmount(amount));
     }
   };
