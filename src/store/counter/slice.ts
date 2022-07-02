@@ -1,16 +1,8 @@
-import {
-  createSlice,
-  PayloadAction,
-  SliceCaseReducers,
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { counterInitialState } from "./initialState";
-import { ICounterProps } from "./interfaces/ICounter";
 import { counterIncrementAsync } from "./thunks";
 
-export const counterSlice = createSlice<
-  ICounterProps,
-  SliceCaseReducers<ICounterProps>
->({
+export const counterSlice = createSlice({
   name: "counter",
   initialState: counterInitialState,
   reducers: {

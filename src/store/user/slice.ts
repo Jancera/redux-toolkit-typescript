@@ -1,12 +1,7 @@
-import {
-  createSlice,
-  PayloadAction,
-  SliceCaseReducers,
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userInitialState } from "./initialState";
-import { IUser } from "./interfaces/IUser";
 
-export const userSlice = createSlice<IUser, SliceCaseReducers<IUser>>({
+export const userSlice = createSlice({
   name: "user",
   initialState: userInitialState,
   reducers: {
