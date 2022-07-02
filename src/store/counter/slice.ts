@@ -1,22 +1,29 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  SliceCaseReducers,
+} from "@reduxjs/toolkit";
 import { counterInitialState } from "./initialState";
 import { IRootProps } from "./interfaces/IRoot";
 import { counterIncrementAsync } from "./thunks";
 
-export const counterSlice = createSlice({
+export const counterSlice = createSlice<
+  IRootProps,
+  SliceCaseReducers<IRootProps>
+>({
   name: "counter",
   initialState: counterInitialState,
   reducers: {
-    counterIncrement(state: IRootProps) {
+    counterIncrement(state) {
       state.counter += 1;
     },
-    counterDecrement(state: IRootProps) {
+    counterDecrement(state) {
       state.counter -= 1;
     },
-    counterReset(state: IRootProps) {
+    counterReset(state) {
       state.counter = 0;
     },
-    counterIncrementByAmount(state: IRootProps, action: PayloadAction<number>) {
+    counterIncrementByAmount(state, action: PayloadAction<number>) {
       state.counter += action.payload;
     },
   },
