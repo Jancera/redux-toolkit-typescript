@@ -1,4 +1,4 @@
-import { counterSlice } from ".";
+import { counterSlice } from "./slice";
 
 export const {
   counterIncrement,
