@@ -1,4 +1,4 @@
-export interface IRootProps {
+export interface ICounterProps {
   counter: number;
   loading: boolean;
 }
