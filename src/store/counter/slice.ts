@@ -4,7 +4,7 @@ import {
   SliceCaseReducers,
 } from "@reduxjs/toolkit";
 import { counterInitialState } from "./initialState";
-import { ICounterProps } from "./interfaces/IRoot";
+import { ICounterProps } from "./interfaces/ICounter";
 import { counterIncrementAsync } from "./thunks";
 
 export const counterSlice = createSlice<
