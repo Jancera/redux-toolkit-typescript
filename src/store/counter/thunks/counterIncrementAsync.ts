@@ -1,8 +1,18 @@
-import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
+import { ActionReducerMapBuilder, createAsyncThunk } from "@reduxjs/toolkit";
 import { ICounterProps } from "../interfaces/ICounter";
-import { counterIncrementAsync } from "../thunks";
 
-const incrementAsyncBuilder = (
+export const counterIncrementAsync = createAsyncThunk(
+  "increment/counter",
+  async (amount: number) => {
+    const response = await new Promise<{ data: number }>((resolve) =>
+      setTimeout(() => resolve({ data: amount }), 2000),
+    );
+
+    return response.data;
+  },
+);
+
+export const incrementAsyncBuilder = (
   builder: ActionReducerMapBuilder<ICounterProps>,
 ) => {
   builder
@@ -17,5 +27,3 @@ const incrementAsyncBuilder = (
       console.log("rejected");
     });
 };
-
-export default incrementAsyncBuilder;

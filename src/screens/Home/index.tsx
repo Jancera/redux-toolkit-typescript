@@ -1,19 +1,13 @@
 import React from "react";
 import { ActivityIndicator, Modal, Text, View } from "react-native";
 import Button from "../../components/Button";
+import { counterSlice } from "../../store/counter/slice";
+import { counterIncrementAsync } from "../../store/counter/thunks/counterIncrementAsync";
+import counterIncrementIfOdd from "../../store/counter/thunks/counterIncrementIfOdd";
 
 import { useAppDispatch } from "../../store/hooks/useAppDispatch";
 import { useAppSelector } from "../../store/hooks/useAppSelector";
-import {
-  counterDecrement,
-  counterIncrement,
-  counterIncrementByAmount,
-  counterReset,
-} from "../../store/counter/actions";
-import {
-  counterIncrementAsync,
-  counterIncrementIfOdd,
-} from "../../store/counter/thunks";
+
 import { styles } from "./styles";
 
 const Home = () => {
@@ -41,13 +35,13 @@ const Home = () => {
         <Button
           title="Increase"
           onPress={() => {
-            dispatch(counterIncrement());
+            dispatch(counterSlice.actions.counterIncrement());
           }}
         />
         <Button
           title="Decrease"
           onPress={() => {
-            dispatch(counterDecrement());
+            dispatch(counterSlice.actions.counterDecrement());
           }}
         />
         <Button
@@ -61,7 +55,7 @@ const Home = () => {
         <Button
           title="By five"
           onPress={() => {
-            dispatch(counterIncrementByAmount(5));
+            dispatch(counterSlice.actions.counterIncrementByAmount(5));
           }}
         />
         <Button
@@ -73,7 +67,7 @@ const Home = () => {
         <Button
           title="Clear"
           onPress={() => {
-            dispatch(counterReset());
+            dispatch(counterSlice.actions.counterReset());
           }}
         />
       </View>
