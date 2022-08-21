@@ -1,4 +1,6 @@
-export interface IUserProps {
+export interface User {
+  id: number;
   name: string;
-  age: string;
+  username: string;
+  email: string;
 }

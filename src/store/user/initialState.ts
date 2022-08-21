@@ -1,6 +1,3 @@
-import { IUserProps } from "./interfaces/IUser";
+import { IUserProps } from "./interfaces/IUserStore";
 
-export const userInitialState: IUserProps = {
-  name: "",
-  age: "",
-};
+export const userInitialState: IUserProps = {};
