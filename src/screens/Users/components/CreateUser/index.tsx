@@ -1,8 +1,8 @@
 import { View, Text, TextInput, Keyboard } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
-import Button from "../../../components/Button";
-import userApi from "../../../store/user/apiSlice";
+import Button from "../../../../components/Button";
+import userApi from "../../../../store/user/apiSlice";
 
 const CreateUser = () => {
   const [name, setName] = useState("");
